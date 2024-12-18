@@ -1,0 +1,6 @@
+@FifaCards_HostAddress = http://localhost:5136
+
+GET {{FifaCards_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
