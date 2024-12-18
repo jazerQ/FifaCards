@@ -3,11 +3,12 @@ using DataAccess;
 using BusinessLogic;
 using DataAccess.Models.DTO;
 
+
 namespace FifaCards.Controllers
 {
     [ApiController]
 	[Route("[controller]")]
-	public class CardsController
+	public class CardsController : ControllerBase
 	{
 		private readonly IFifaCardService _fifaService;
 		public CardsController(IFifaCardService fifaService)
@@ -18,7 +19,19 @@ namespace FifaCards.Controllers
 		public async Task<IActionResult> CreateAsync([FromBody] CreateCardRequest createCardRequest) 
 		{
 			await _fifaService.CreateAsync(createCardRequest.FifaCard, createCardRequest.skills);
-			return new NoContentResult();
+			return NoContent();
+		}
+		[HttpGet("{id:int}")]
+		public async Task<IActionResult> GetCardAsync(int id) 
+		{
+			try
+			{
+				var card = await _fifaService.GetByIdAsync(id);
+				return Ok(card);
+			}catch(Exception ex) 
+			{
+				return BadRequest("we have some Problems -> " + ex.Message);
+			}
 		}
 	}
 }
