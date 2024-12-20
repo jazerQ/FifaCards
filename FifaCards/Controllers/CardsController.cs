@@ -33,5 +33,18 @@ namespace FifaCards.Controllers
 				return BadRequest("we have some Problems -> " + ex.Message);
 			}
 		}
+		[HttpPut]
+		public async Task<IActionResult> UpdateCard([FromBody] UpdateCardRequestDTO updateCard) 
+		{
+			try 
+			{
+				await _fifaService.UpdateAsync(updateCard.Id, updateCard.FifaCard, updateCard.skills);
+				return NoContent();
+			}
+			catch(Exception ex) 
+			{
+				return BadRequest("we have some Problems -> " + ex.Message);
+			}
+		}
 	}
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Data.Repository
 {
-	internal class FifaCardsRepository(FifaContext context) : IFifaCardsRepository
+	internal class FifaCardsRepository(FifaContext _context) : IFifaCardsRepository
 	{
 		
 		/*public FifaCardsRepository(FifaContext context) 
@@ -16,15 +16,21 @@ namespace DataAccess.Data.Repository
 		}*/
 		public async Task CreateAsync(FifaCard card, CancellationToken cancellationToken = default)
 		{
-			await context.Cards.AddAsync(card, cancellationToken);
-			await context.SaveChangesAsync(cancellationToken);
+			await _context.Cards.AddAsync(card, cancellationToken);
+			await _context.SaveChangesAsync(cancellationToken);
 		}
 
 		public async Task<FifaCard?> GetById(int id, CancellationToken cancellationToken = default)
 		{
-			var Card = await context.Cards.FirstOrDefaultAsync(x => x.Id == id);
+			var Card = await _context.Cards.FirstOrDefaultAsync(x => x.Id == id);
 
 			return Card;
+		}
+
+		public async Task UpdateAsync(FifaCard card, CancellationToken cancellationToken = default)
+		{
+			_context.Cards.Update(card);
+			await _context.SaveChangesAsync(cancellationToken);
 		}
 	}
 }
