@@ -5,15 +5,6 @@ namespace DataAccess
 {
 	public class Skills
 	{
-		public Skills(SkillsDTO skills) 
-		{
-			this.Dribling = skills.Dribling;
-			this.Defence = skills.Defence;
-			this.HeadGame = skills.HeadGame;
-			this.Pace = skills.Pace;
-			this.Pas = skills.Pas;
-			this.Shoot = skills.Shoot;
-		}
 		public int Id { get; set; }
 		public int CardId { get; set; }
 		public int Overall { get; set; }

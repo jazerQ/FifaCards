@@ -22,13 +22,14 @@ namespace DataAccess.Data.Repository
 
 		public async Task<FifaCard?> GetById(int id, CancellationToken cancellationToken = default)
 		{
-			var Card = await _context.Cards.FirstOrDefaultAsync(x => x.Id == id);
+			var Card = await _context.Cards.Include(c => c.Skills).FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
 
 			return Card;
 		}
 
 		public async Task UpdateAsync(FifaCard card, CancellationToken cancellationToken = default)
 		{
+			Console.WriteLine($"{card.Skills.Id}   {card.Skills.CardId}   {card.Skills.Overall}  {card.Skills.Dribling} {card.Skills.Defence}");
 			_context.Cards.Update(card);
 			await _context.SaveChangesAsync(cancellationToken);
 		}

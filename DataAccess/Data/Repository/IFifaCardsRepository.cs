@@ -11,5 +11,6 @@ namespace DataAccess.Data.Repository
 		Task CreateAsync(FifaCard card, CancellationToken cancellationToken = default);
 		Task<FifaCard?> GetById(int id, CancellationToken cancellationToken = default);
 		Task UpdateAsync(FifaCard card, CancellationToken cancellationToken = default);
+		Task DeleteAsync
 	}
 }
