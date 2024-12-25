@@ -33,5 +33,10 @@ namespace DataAccess.Data.Repository
 			_context.Cards.Update(card);
 			await _context.SaveChangesAsync(cancellationToken);
 		}
+		public async Task DeleteAsync(FifaCard card, CancellationToken cancellationToken = default) 
+		{
+			_context.Cards.Remove(card);
+			await _context.SaveChangesAsync(cancellationToken);
+		}
 	}
 }

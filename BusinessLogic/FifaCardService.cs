@@ -59,5 +59,14 @@ namespace BusinessLogic
 			}
 			await _cardsRepository.UpdateAsync(card, cancellationToken);
 		}
+		public async Task DeleteAsync(int id, CancellationToken cancellationToken) 
+		{
+			var card = await GetByIdAsync(id, cancellationToken);
+			if(card == null) 
+			{
+				throw new Exception("Card not Found!");
+			}
+			await _cardsRepository.DeleteAsync(card, cancellationToken);
+		}
 	}
 }

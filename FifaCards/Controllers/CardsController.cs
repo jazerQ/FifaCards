@@ -49,7 +49,14 @@ namespace FifaCards.Controllers
 		[HttpDelete]
 		public async Task<IActionResult> DeleteCard(int id) 
 		{
-			
+			try
+			{
+				await _fifaService.DeleteAsync(id);
+				return NoContent();
+			}catch(Exception ex) 
+			{
+				return BadRequest("we have some Problems -> " + $"{ex.Message} {ex.Source}  {ex.InnerException} ");
+			}
 		}
 	}
 }
